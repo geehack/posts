@@ -1,0 +1,51 @@
+* 修改yum源为阿里源
+
+#+BEGIN_SRC shell
+cd /etc/yum.repos.d
+mv CentOS-Base.repo CentOS-Base.repo.bak
+curl http://mirrors.aliyun.com/repo/Centos-7.repo > CentOS-Base.repo
+curl http://mirrors.aliyun.com/repo/epel-7.repo > epel-7.repo
+
+yum clean all
+rm -rf /var/cache/yum
+yum makecache
+#+END_SRC
+
+添加EPEL源为可选
+
+
+* 添加私有用户到sudolist
+sudoedit /etc/sudoers
+
+在最后一行增加: sta ALL=(ALL) ALL
+
+
+* 修改sshd配置提高ssh连接速度
+
+编辑/etc/ssh/sshd_config
+
+将以下两项修改
+
+#+BEGIN_SRC
+UseDNS no
+GSSAPIAuthentication no
+#+END_SRC
+
+重启服务
+
+sudo systemctl restart sshd
+
+
+* 安装docker
+#+BEGIN_SRC shell
+yum install docker
+
+# 添加当前非root用户到docker管理组
+sudo gpasswd -a $USER docker
+sudo gpasswd -a $USER dockerroot
+newgrp #立即刷新用户的当前组
+
+# 配置docker服务的启动参数，默认网桥网络的ip段为指定段，也可以添加其他启动参数
+echo OPTIONS="--bip=10.40.0.1/16" > /etc/sysconfig/docker
+
+#+END_SRC

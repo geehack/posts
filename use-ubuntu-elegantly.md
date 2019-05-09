@@ -21,18 +21,38 @@
 
 ```bash
 sudo apt install gnome-tweak-tool #安装
-gnome-tweak-tool #启动
+gnome-tweaks #启动
 ```
 
-定位到`Keyboad&Mouse` > `Ctrl key position` 选中`Swap Ctrl and Caps Lock`
+定位到`Keyboad&Mouse` > `Additional Layout Options` > `Ctrl key position` 选中`Swap Ctrl and Caps Lock`
 
 ### 修改鼠标滚轮自然滚动
 `settings` > `Devices` > `Mouse & TOuchpad` 找到`Mouse`设置部分，选中`Natural Scrolling`
+
+
+
+### 安装输入法
+
+中州韵输入法官网： `http://rime.im`
+
+
+
+`apt install ibus-rime`
+
+
 
 ### 电源管理
 
 - 下载电源管理工具包 `sudo apt install pm-utils`
 - 睡眠 `sudo pm-suspend`
+
+
+
+### files关闭Recent
+
+`settings > privacy > Usage&History`  关闭
+
+files文件管理器的左侧Recent项消失
 
 
 
@@ -43,7 +63,7 @@ gnome-tweak-tool #启动
 ``` bash
 sudo add-apt-repository ppa:numix/ppa
 sudo apt-get update
-sudo apt-get install numix-gtk-theme numix-icon-theme-circle
+sudo apt-get install numix-gtk-theme numix-icon-theme-circle numix-icon-theme-bevel numix-icon-theme-square
 ```
 
 
@@ -73,3 +93,42 @@ $ chmod +x idea.desktop
 ```
 
 双击图标，就可以直接启动`IntelliJ IDEA`了
+
+* proxy 代理
+=============
+
+shadowsocks
+-------------
+
+`apt install shadowsocks-libev`
+
+配置文件`.shadowsocks`
+
+``` json
+{
+  "server":"45.249.247.111",
+  "server_port":10261,
+  "local_address": "127.0.0.1",
+  "local_port":8016,
+  "password":"vZBoklA",
+  "timeout":300,
+  "method":"chacha20",
+  "fast_open": false
+}
+```
+
+执行 `ss-local -c .shadowsocks`
+
+
+PROXYCHAINS
+-------------
+对应用定向代理的工具
+
+``` bash
+[ ] sudo yum install -y gcc git
+[ ] apt install git
+
+git clone https://github.com/rofl0r/proxychains-ng.git && cd proxychains-ng
+./configure --prefix=/usr --sysconfdir=/etc && make && sudo make install && sudo make install-config
+sudo sed -i 's/^socks4\(.*\)9050/socks5  127.0.0.1 8016/g' /etc/proxychains.conf
+```

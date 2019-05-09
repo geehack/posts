@@ -29,6 +29,8 @@
 
 ### 修改archetype的pom.xml
 
+路径: `target/generated-sources/archetype/pom.xml` , 是archetype的pom.xml，不是模板项目的pom.xml
+
 需要将pom.xml的tab替换为空格，并加入下面两部分
 
 ``` xml
@@ -65,7 +67,7 @@
 
 ### 修改相关文件变量替换
 
-1. 进入`target/generated-sources/archetype/src/main/resources/archetype-resources`目录下，手工编辑里面相关源代码，如果有西药进行变量替换的文件，就加入相关变量，如`${groupid}` `${artifactid}` `${package}`
+1. 进入`target/generated-sources/archetype/src/main/resources/archetype-resources`目录下，手工编辑里面相关源代码，如果有些要进行变量替换的文件，就加入相关变量，如`${groupid}` `${artifactid}` `${package}`
 2. 编辑`target/generated-sources/archetype/src/main/resources/META-INF/maven/archetype-metadata.xml`文件，把需要变量替换的文件项目开启`filtered=“true”`
 
 此时，根据当前`archetype`创建项目过程中，这些变量会被替换掉。
@@ -97,7 +99,7 @@
       <repositories>
         <repository>
           <id>archetype</id>
-          <url>http://artifactory.local/artifactory/libs-snapshot</url>
+          <url>http://artifactory.local/artifactory/libs-snapshot-local</url>
           <releases>
             <enabled>true</enabled>
             <checksumPolicy>fail</checksumPolicy>
@@ -129,7 +131,7 @@ mvn archetype:generate -B \
  -DarchetypeCatalog=internal \
  -DarchetypeGroupId=com.huwo.archetypes \
  -DarchetypeArtifactId=microservice-server-archetype \
- -DarchetypeVersion=0.0.4-SNAPSHOT \
+ -DarchetypeVersion=0.0.6-SNAPSHOT \
  -DgroupId=com.huwo.demo.archetype \
  -DartifactId=test1 \
  -Dversion=1.0.0-SNAPSHOT A \
