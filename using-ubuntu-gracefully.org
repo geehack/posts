@@ -59,8 +59,43 @@ sudo apt-get install numix-gtk-theme numix-icon-theme-circle numix-icon-theme-be
 
 
 * SOFTWARE
+- snap :: 新的软件管理工具，snap格式会把一个软件依赖的所有库都打入一个包内，非常干净
+- appimage :: 类似mac的软件，一个镜像一个软件
+  1. 只要对Appimage文件赋予执行权限即可
+  2. 第一次执行会提示是否集成，会添加桌面图标到 ~$HOME/.local/share/applications/~ 中
+  3. 会在 ~$HOME/.config/~ 下创建应用名字的目录
+  4. 解压已有AppImage文件: ~xxx.AppImage --appimage-extract~
+  5. 压缩已解压的AppImage目录: 下载appimagetool-x86_64.AppImage, 执行 ~appimagetool-x86_64.AppImage 解压后的文件夹~
+
+
+
 - list
   - `Terminator`
+
+
+** WPS :: 文字表格处理
+
+1. 解决打开WPS时出现的系统缺失字体问题
+https://pan.baidu.com/s/1eS6xIzo 下载 wps_symbol_fonts.zip
+
+把下载下来的字体包内6个字体复制到 ~$HOME/.fonts/~ 目录下或 ~/usr/share/fonts~ 目录下即可
+
+重启wps
+
+
+** Terminator :: 多功能终端工具
+** KeePassXC :: 密码管理工具
+
+官方网站 https://keepassxc.org/
+
+** uget :: 下载工具
+
+#+BEGIN_SRC shell
+sudo add-apt-repository ppa:phoerious/keepassxc
+sudo apt update
+sudo apt install keepassxc
+#+END_SRC
+
 
 
 
@@ -157,3 +192,9 @@ dpkg --configure -a
 1. 执行: apt install dkms
 2. Disabling secure boot in my BIOS
 3. apt install virtualbox
+
+** 大版本升级
+#+BEGIN_SRC shell
+sudo apt update
+sudo do-release-upgrade
+#+END_SRC
